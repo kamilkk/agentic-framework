@@ -52,7 +52,7 @@ argument-hint: "{Example usage, e.g. 'Provide a bug report or requirement descri
 ## Output Format
 
 **Artifact Type**: {ANALYSIS / PLAN / SPEC / RCA / FIX / TC / EXPLANATION}
-**File Pattern**: `Local_Specification/{TYPE}-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/{TYPE}-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

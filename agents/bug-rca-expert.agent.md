@@ -78,7 +78,7 @@ Perform structured Root Cause Analysis using hypothesis-driven investigation and
 ## Output Format
 
 **Artifact Type**: RCA
-**File Pattern**: `Local_Specification/RCA-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/RCA-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

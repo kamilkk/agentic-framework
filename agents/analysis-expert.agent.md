@@ -67,7 +67,7 @@ Investigate requirements, map them to specific code locations, detect ambiguitie
 ## Output Format
 
 **Artifact Type**: ANALYSIS
-**File Pattern**: `Local_Specification/ANALYSIS-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/ANALYSIS-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

@@ -3,7 +3,7 @@ name: "implement-expert"
 description: |
   Executes single implementation tasks from plan outputs with YAGNI enforcement,
   pattern adherence, and scope-lock discipline. Makes actual code changes.
-argument-hint: "Provide a plan file path + task ID, e.g. 'Local_Specification/PLAN-20260528-fix.md TASK-03'"
+argument-hint: "Provide a plan file path + task ID, e.g. '_local_specification/PLAN-20260528-fix.md TASK-03'"
 ---
 
 # ⚡ Implement Expert

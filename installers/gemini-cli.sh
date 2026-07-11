@@ -199,10 +199,10 @@ SKILLS_HEADER
 
 ## Output Conventions
 
-Save analysis/plan/spec artifacts to `Local_Specification/`:
-- Pattern: `Local_Specification/[TYPE]-[YYYYMMDD]-[slug].md`
+Save analysis/plan/spec artifacts to `_local_specification/`:
+- Pattern: `_local_specification/[TYPE]-[YYYYMMDD]-[slug].md`
 - Types: ANALYSIS, PLAN, SPEC, RCA, FIX, TC, EXPLAIN, SECURITY
-- With work item: `Local_Specification/[WORKITEM_TYPE]_[NUMBER]/[file].md`
+- With work item: `_local_specification/[WORKITEM_TYPE]_[NUMBER]/[file].md`
 - Code changes: make directly to source files (never use create_file for .ts/.cs/.py)
 
 OUTPUT

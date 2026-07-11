@@ -86,7 +86,7 @@ For each finding:
 ## Output Format
 
 **Artifact Type**: SECURITY-ASSESSMENT
-**File Pattern**: `Local_Specification/SECURITY-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/SECURITY-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

@@ -140,11 +140,11 @@ Apply `guardrails/security.md` — PII masking, no destructive operations withou
 
 ## Output File Conventions
 
-All agent output files are saved to a `Local_Specification/` directory:
+All agent output files are saved to a `_local_specification/` directory:
 
 **Path Structure:**
 ```
-Local_Specification/
+_local_specification/
 ├── [WORKITEM_TYPE]_[NUMBER]/     # When work item ID is provided
 │   ├── SPEC-[YYYYMMDD]-[slug].md
 │   ├── ANALYSIS-[YYYYMMDD]-[slug].md
@@ -156,7 +156,7 @@ Local_Specification/
 ```
 
 **Rules:**
-- Use `create_file` ONLY for agent deliverable `.md` files in `Local_Specification/`
+- Use `create_file` ONLY for agent deliverable `.md` files in `_local_specification/`
 - NEVER use `create_file` on source code files
 - If file exists: append version suffix `-v2`, `-v3`, etc.
 - Exclude verification sections from saved file (show in chat only)

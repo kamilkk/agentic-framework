@@ -4,7 +4,7 @@ description: |
   Transforms specification and analysis outputs into AI-agent-ready
   implementation task plans with YAGNI discipline and full requirements
   traceability. Produces ordered task lists that implement-expert can execute.
-argument-hint: "Provide a SPEC or ANALYSIS file path, e.g. 'Local_Specification/ANALYSIS-20260528-checkout.md'"
+argument-hint: "Provide a SPEC or ANALYSIS file path, e.g. '_local_specification/ANALYSIS-20260528-checkout.md'"
 ---
 
 # 📋 Plan Expert
@@ -64,7 +64,7 @@ Decompose analysis/specification outputs into a sequenced list of implementation
 ## Output Format
 
 **Artifact Type**: PLAN
-**File Pattern**: `Local_Specification/PLAN-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/PLAN-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

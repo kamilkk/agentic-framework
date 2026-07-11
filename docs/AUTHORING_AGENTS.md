@@ -85,7 +85,7 @@ Analyze database schema changes, generate migration scripts, and verify data int
 - Estimate migration duration for large tables
 
 ## Output Contract
-File: `Local_Specification/MIGRATION-[YYYYMMDD]-[slug].md`
+File: `_local_specification/MIGRATION-[YYYYMMDD]-[slug].md`
 Contains: Schema diff, UP script, DOWN script, impact notes.
 
 ## Quality Gate

@@ -78,7 +78,7 @@ For each EARS requirement:
 ## Output Format
 
 **Artifact Type**: SPEC
-**File Pattern**: `Local_Specification/SPEC-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/SPEC-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

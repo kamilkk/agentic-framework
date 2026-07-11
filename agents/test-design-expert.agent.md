@@ -79,7 +79,7 @@ For each test case:
 ## Output Format
 
 **Artifact Type**: TC (Test Cases)
-**File Pattern**: `Local_Specification/TC-{YYYYMMDD}-{slug}.md`
+**File Pattern**: `_local_specification/TC-{YYYYMMDD}-{slug}.md`
 
 ### Output Template
 

@@ -65,7 +65,7 @@ Investigate and explain code concepts, patterns, architectural decisions, and sy
 ## Output Format
 
 **Artifact Type**: Explanation (in chat for quick, file for comprehensive)
-**File Pattern**: `Local_Specification/EXPLAIN-{YYYYMMDD}-{slug}.md` (for complex explanations)
+**File Pattern**: `_local_specification/EXPLAIN-{YYYYMMDD}-{slug}.md` (for complex explanations)
 
 ### Output Template
 
