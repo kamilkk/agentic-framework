@@ -6,7 +6,6 @@ This guide covers creating custom skills for the agentic framework.
 
 - Source: `skills/<name>/SKILL.md`
 - Claude deployment: `.claude/skills/<name>/SKILL.md`
-- Gemini deployment: Summarized into GEMINI.md skills section
 
 ## Structure
 
@@ -123,15 +122,6 @@ Never log: passwords, tokens, PII, full credit card numbers, or API keys.
 - [ ] Context fields present (correlation ID where applicable)
 - [ ] No sensitive data in log output
 ```
-
-## Compilation for Gemini
-
-Since Gemini uses a single flat file, skills are summarized during compilation. Write your SKILL.md assuming the full version is available (Claude) but ensure the core rules are captured in the first 3-5 bullet points (Gemini summary).
-
-The installer extracts:
-1. Skill name and purpose (first line + Purpose section)
-2. Core rules (condensed to single-line bullets)
-3. Activation condition
 
 ## Skill Interactions
 

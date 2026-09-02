@@ -39,6 +39,13 @@ Transform informal human requirements into structured, unambiguous, testable spe
 | exhaustive-analysis | When complex multi-condition requirements |
 | test-case-design | When acceptance criteria need test perspective |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for established terminology and prior specs so EARS statements reuse consistent terms. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — domain-term → entity mappings settled during specification (glossary) — to the matching memory file (project knowledge, not source code). The SPEC itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Requirement Capture

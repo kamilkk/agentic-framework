@@ -39,6 +39,13 @@ Perform structured Root Cause Analysis using hypothesis-driven investigation and
 | workspace-search | When locating relevant code/config |
 | error-handling | When analyzing error propagation |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for prior root causes and known patterns before enumerating hypotheses. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — root-cause patterns and preventive decisions with lasting value — to the matching memory file (project knowledge, not source code). The RCA report itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Problem Statement

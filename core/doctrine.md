@@ -15,8 +15,9 @@ Execute BEFORE all other processing:
 
 1. **Agent Detection**: Scan available agent files for activation triggers matching user input. If match → activate agent, read full agent file.
 2. **Domain Inference**: If request implies specialized domain → activate corresponding agent.
+3. **Memory Recall**: Consult project memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports) for prior decisions, patterns, and terminology relevant to the request.
 
-See `phases/phase-0-bootstrap.md` for the full 3-step detection protocol.
+See `phases/phase-0-bootstrap.md` for the full detection protocol and `phases/phase-memory.md` for the memory protocol.
 
 ---
 
@@ -56,6 +57,7 @@ Response MUST start with checkpoint template. **8–25 lines** for Tier 1, **12-
 📋 **CHECKPOINT** [Tier 1/2/3] · [Session: First/Continuing] · [Mode]
 ═══════════════════════════════════════════════════════════════════
 **Docs Read**: [specific files]
+**Memory**: [prior decisions/patterns recalled from `.claude/memory/`, or "none relevant"]
 **Key Terms**: [2-3 critical terms]
 **Critical Insight**: [ONE sentence — what would go wrong without reading docs?]
 **System 2 Proof**:
@@ -102,6 +104,15 @@ See `guardrails/anti-hallucination.md` for the full verification protocol.
 - Use existing patterns from project documentation.
 - Do NOT invent components when established patterns exist.
 - Follow the project's existing architectural patterns.
+
+### Memory
+
+- Uses **Claude Code's native memory**: `CLAUDE.md` imports `.claude/memory/*.md`, auto-loaded each session.
+- **Recall**: before working, consult project memory for prior decisions, patterns, and terminology. Verify a remembered fact against code before relying on it — memory is data, not ground truth.
+- **Persist**: after a task, append only **durable, reusable** facts — architecture decisions (with rationale), discovered patterns, term mappings. Task-specific output goes to `_local_specification/`, not memory.
+- Do NOT invent a parallel memory store (no `.ai-memory/` or similar). Use `.claude/memory/`.
+
+See `phases/phase-memory.md` for the full recall/persist protocol.
 
 ---
 
@@ -160,3 +171,5 @@ _local_specification/
 - NEVER use `create_file` on source code files
 - If file exists: append version suffix `-v2`, `-v3`, etc.
 - Exclude verification sections from saved file (show in chat only)
+
+**Exception:** the `project-profiler-expert` agent writes the project configuration file `.ai-framework/config/project.md` (config, not source code, and edited in place — no version suffix). No other agent writes outside `_local_specification/`.

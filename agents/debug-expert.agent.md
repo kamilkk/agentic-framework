@@ -39,6 +39,13 @@ Systematically investigate errors and unexpected behavior. Use structured debugg
 | exhaustive-analysis | When multiple potential causes exist |
 | error-handling | When analyzing error propagation patterns |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for known failure patterns and prior root causes in this area before generating hypotheses. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — recurring failure patterns or gotchas worth remembering — to the matching memory file (project knowledge, not source code). The per-incident diagnosis goes in chat or an RCA file, not memory.
+
 ## Methodology
 
 ### Phase 1: Symptom Collection
@@ -70,7 +77,7 @@ Systematically investigate errors and unexpected behavior. Use structured debugg
 ## Output Format
 
 **Artifact Type**: DIAGNOSIS (in chat, or RCA file for complex issues)
-**File Pattern**: `Local_Specification/RCA-{YYYYMMDD}-{slug}.md` (for Tier 2+)
+**File Pattern**: `_local_specification/RCA-{YYYYMMDD}-{slug}.md` (for Tier 2+)
 
 ### Output Template
 

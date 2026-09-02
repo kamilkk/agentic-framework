@@ -9,6 +9,7 @@
 📋 **CHECKPOINT** [Tier 1/2/3] · [Session: First/Continuing] · [Mode: @teach/@dev/default]
 ═══════════════════════════════════════════════════════════════════
 **Docs Read**: [list of specific files read]
+**Memory**: [prior decisions/patterns recalled from `.claude/memory/`, or "none relevant"]
 **Key Terms**: [2–3 most critical terms with one-word context]
 **Critical Insight**: [ONE sentence: What would go wrong without docs?]
 **System 2 Proof**:
@@ -52,4 +53,5 @@
 
 - **First task**: Full checkpoint + full doc search
 - **Subsequent tasks (same session)**: Checkpoint STILL required, but reference prior reads
-- **Context window reset**: Treat as new session (re-search docs)
+- **Context window reset**: Treat as new session (re-search docs) — but project memory (`.claude/memory/`) survives the reset and is reloaded via `CLAUDE.md`, so recall it instead of rediscovering from scratch.
+- **Persist durable findings**: before finishing, append any reusable decision/pattern/term discovered to `.claude/memory/` (see `phase-memory.md`), so the next session starts from it.

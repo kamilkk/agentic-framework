@@ -26,6 +26,7 @@ If request implies specialized domain (and no agent activated yet):
 
 | Domain | Agent |
 |--------|-------|
+| Project onboarding / config | `project-profiler-expert` |
 | Architecture decisions | `solution-architect` |
 | Bug investigation | `debug-expert` / `bug-rca-expert` |
 | Code implementation | `implement-expert` |
@@ -46,5 +47,6 @@ Then: `🎯 Executing: [Agent Name] | Reading: [agent-file]`
 
 Before executing any agent protocol:
 1. Read project configuration for output file path rules
-2. Complete safety verification checklist
-3. Check tool/MCP availability (first task in session)
+2. **Recall project memory**: consult `.claude/memory/` (decisions, patterns, glossary — auto-loaded via `CLAUDE.md` imports) for prior context relevant to the request. See `phase-memory.md`.
+3. Complete safety verification checklist
+4. Check tool/MCP availability (first task in session)

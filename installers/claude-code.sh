@@ -122,7 +122,7 @@ get_skills_list() {
 
 # --- Step 1: Create directory structure ---
 info "Creating directory structure..."
-for dir in .claude/agents .claude/skills .claude/commands .ai-framework/config; do
+for dir in .claude/agents .claude/skills .claude/commands .claude/memory .ai-framework/config; do
     if [[ "$DRY_RUN" == true ]]; then
         echo "  [dry-run] mkdir $TARGET_DIR/$dir"
     else
@@ -197,6 +197,34 @@ else
     ok "Project config template deployed"
 fi
 
+# --- Step 5b: Seed project memory (never overwrite accumulated memory) ---
+info "Seeding project memory..."
+seed_memory() {
+    local dst="$1" title="$2" purpose="$3"
+    if [[ -f "$dst" ]]; then
+        warn "  Memory exists — preserved: $(basename "$dst")"
+        return
+    fi
+    if [[ "$DRY_RUN" == true ]]; then
+        echo "  [dry-run] $dst"
+        return
+    fi
+    mkdir -p "$(dirname "$dst")"
+    cat > "$dst" <<EOF
+# ${title}
+
+> ${purpose}
+> Native Claude Code memory — imported by \`CLAUDE.md\`, auto-loaded each session.
+> Agents append durable facts here; add your own with \`#\` or \`/memory\`. See \`phase-memory.md\`.
+
+<!-- Add entries below. Format: ### YYYY-MM-DD — Short title, then the fact + why. -->
+EOF
+    ok "  Memory: $(basename "$dst")"
+}
+seed_memory "$TARGET_DIR/.claude/memory/decisions.md" "Architecture & Design Decisions" "Durable decisions and the rationale behind them."
+seed_memory "$TARGET_DIR/.claude/memory/patterns.md" "Codebase Patterns & Conventions" "Discovered patterns and conventions downstream work should follow."
+seed_memory "$TARGET_DIR/.claude/memory/glossary.md" "Domain Glossary" "Domain term to codebase entity mappings."
+
 # --- Step 6: Generate CLAUDE.md ---
 info "Generating CLAUDE.md..."
 generate_claude_md() {
@@ -217,6 +245,18 @@ HEADER
     echo "## Output Conventions"
     echo ""
     cat "$FRAMEWORK_DIR/core/doctrine.md" | sed -n '/^## Output File Conventions/,$p'
+    echo ""
+
+    # Section 2b: Project Memory (native Claude Code memory via @ imports)
+    echo "## Project Memory"
+    echo ""
+    echo "Persistent cross-session memory. Consult before working; append durable decisions,"
+    echo "patterns, and terminology after (not per-task detail — that goes to \`_local_specification/\`)."
+    echo "Files below are imported and auto-loaded each session. See \`phase-memory.md\`."
+    echo ""
+    echo "@.claude/memory/decisions.md"
+    echo "@.claude/memory/patterns.md"
+    echo "@.claude/memory/glossary.md"
     echo ""
 
     # Section 3: Agent Catalog
@@ -258,7 +298,10 @@ HEADER
     # Section 5: Project Configuration Reference
     echo "## Project Configuration"
     echo ""
-    echo "See \`.ai-framework/config/project.md\` for project-specific settings."
+    echo "Project-specific settings (tech stack, conventions, repos, work-item system)."
+    echo "Imported below and auto-loaded each session; edit the file, not this section."
+    echo ""
+    echo "@.ai-framework/config/project.md"
     echo ""
     echo "---"
     echo ""
@@ -303,6 +346,7 @@ echo "  ├── CLAUDE.md"
 echo "  ├── .claude/"
 echo "  │   ├── agents/     ($(get_agents_list | wc -l | tr -d ' ') agents)"
 echo "  │   ├── skills/     ($(get_skills_list | wc -l | tr -d ' ') skills)"
-echo "  │   └── commands/   (slash commands)"
+echo "  │   ├── commands/   (slash commands)"
+echo "  │   └── memory/     (persistent memory, imported by CLAUDE.md)"
 echo "  └── .ai-framework/"
 echo "      └── config/project.md"

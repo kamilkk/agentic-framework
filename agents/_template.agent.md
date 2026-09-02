@@ -35,6 +35,13 @@ argument-hint: "{Example usage, e.g. 'Provide a bug report or requirement descri
 |-------|-------------|
 | {skill} | {condition} |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult project memory for prior {domain-relevant items, e.g. decisions/patterns/terms}. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — {agent-specific, e.g. "confirmed patterns and term mappings"} — to the matching memory file. Task deliverables still go to `_local_specification/`, not memory.
+
 ## Methodology
 
 ### Phase 1: {Phase Name}

@@ -38,6 +38,13 @@ Decompose analysis/specification outputs into a sequenced list of implementation
 | multi-agent-orchestration | When plan involves multiple agents |
 | exhaustive-analysis | When ensuring 100% requirement coverage |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for prior decisions and patterns that constrain task ordering or approach. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — sequencing/decomposition decisions with lasting rationale — to the matching memory file (project knowledge, not source code). The PLAN itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Input Validation

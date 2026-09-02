@@ -41,6 +41,13 @@ Investigate requirements, map them to specific code locations, detect ambiguitie
 | white-box-tracing | When tracing data/control flow through system |
 | error-handling | When analyzing error scenarios |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for prior impact maps, architectural decisions, and domain-term mappings before re-investigating. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — confirmed component→file mappings, new domain-term → entity mappings (glossary), architectural constraints surfaced — to the matching memory file (project knowledge, not source code). The ANALYSIS report itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Requirement Decomposition

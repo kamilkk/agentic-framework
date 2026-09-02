@@ -38,6 +38,13 @@ Investigate and explain code concepts, patterns, architectural decisions, and sy
 | white-box-tracing | When explaining execution flows |
 | exhaustive-analysis | When comprehensive coverage requested |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for recorded design decisions and their rationale so explanations reflect the real "why", not a guess. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — a design-decision rationale or term → entity mapping (glossary) uncovered while explaining — to the matching memory file (project knowledge, not source code). The explanation itself goes in chat or `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Scope & Discovery

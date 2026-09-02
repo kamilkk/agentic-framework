@@ -6,7 +6,6 @@ This guide covers creating custom agents for the agentic framework.
 
 - Source: `agents/<name>.agent.md`
 - Claude deployment: `.claude/agents/<name>.agent.md`
-- Gemini deployment: Compiled into GEMINI.md agents section
 
 ## Structure
 
@@ -52,10 +51,8 @@ The Core Constraint prevents scope creep. Examples:
 ### 4. Phase Gates
 Each methodology phase should produce a verifiable artifact before proceeding to the next phase.
 
-### 5. Tool-Agnostic
-Write agents without referencing specific tool capabilities. The installer handles adaptation:
-- Claude: Each agent becomes a separate file in `.claude/agents/`
-- Gemini: Agents are compiled into sections of GEMINI.md
+### 5. Keep Source Portable
+Write agents in the framework's own format; the installer deploys each one as a separate file in `.claude/agents/`. Avoid hard-coding absolute paths or environment-specific assumptions in the source.
 
 ## Example: Creating a Migration Agent
 
