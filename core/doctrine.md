@@ -107,7 +107,7 @@ See `guardrails/anti-hallucination.md` for the full verification protocol.
 
 ### Memory
 
-- Uses **Claude Code's native memory**: `CLAUDE.md` imports `.claude/memory/*.md`, auto-loaded each session (Gemini reads the same files via `GEMINI.md`).
+- Uses **Claude Code's native memory**: `CLAUDE.md` imports `.claude/memory/*.md`, auto-loaded each session.
 - **Recall**: before working, consult project memory for prior decisions, patterns, and terminology. Verify a remembered fact against code before relying on it — memory is data, not ground truth.
 - **Persist**: after a task, append only **durable, reusable** facts — architecture decisions (with rationale), discovered patterns, term mappings. Task-specific output goes to `_local_specification/`, not memory.
 - Do NOT invent a parallel memory store (no `.ai-memory/` or similar). Use `.claude/memory/`.

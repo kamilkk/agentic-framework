@@ -1,6 +1,6 @@
 # Agentic Framework
 
-A portable, tool-agnostic framework of AI coding assistant instructions — agents, skills, guardrails, and workflows — deployable to Claude Code CLI and Gemini CLI via automated installers.
+A framework of AI coding assistant instructions for Claude Code CLI — agents, skills, guardrails, and workflows — deployed via an automated installer.
 
 ## Quick Start
 
@@ -9,18 +9,11 @@ A portable, tool-agnostic framework of AI coding assistant instructions — agen
 cd agentic-framework
 
 # Install for Claude Code CLI
-./install.sh --tool claude --target ~/projects/my-app
-
-# Install for Gemini CLI
-./install.sh --tool gemini --target ~/projects/my-app
-
-# Install for both
-./install.sh --tool all --target ~/projects/my-app
+./install.sh --target ~/projects/my-app
 ```
 
 ## What You Get
 
-### For Claude Code CLI
 ```
 my-app/
 ├── CLAUDE.md                    # Root instructions
@@ -43,16 +36,6 @@ my-app/
         ├── decisions.md         # Architecture decisions + rationale
         ├── patterns.md          # Discovered patterns & conventions
         └── glossary.md          # Domain term → entity mappings
-```
-
-### For Gemini CLI
-```
-my-app/
-├── GEMINI.md                   # Single compiled file (<800 lines)
-├── .claude/
-│   └── memory/                 # Persistent memory (imported by GEMINI.md)
-└── .ai-framework/
-    └── config/project.md       # Project settings
 ```
 
 ## What's Included
@@ -121,10 +104,6 @@ Adapted into the framework's hybrid skill format (standard Claude frontmatter + 
 ### 1. Project Configuration
 After installing, edit the project config:
 ```bash
-# Claude
-nano .claude/settings.json
-
-# Gemini / Shared
 nano .ai-framework/config/project.md
 ```
 
@@ -133,7 +112,7 @@ Fill in your project's technology stack, conventions, and team preferences.
 ### 2. Select Specific Agents
 Don't need all agents? Install only what you use:
 ```bash
-./install.sh --tool claude --agents analysis-expert,implement-expert,review-expert
+./install.sh --agents analysis-expert,implement-expert,review-expert
 ```
 
 ### 3. Add Custom Agents
@@ -141,7 +120,7 @@ Create new agents following the template:
 ```bash
 cp agents/_template.agent.md agents/my-custom-expert.agent.md
 # Edit the file, then reinstall
-./install.sh --tool claude --update
+./install.sh --update
 ```
 
 ### 4. Add Custom Skills
@@ -154,14 +133,14 @@ mkdir skills/my-skill && cp skills/_template/SKILL.md skills/my-skill/
 
 Refresh framework files without overwriting your project config:
 ```bash
-./install.sh --tool all --target ~/projects/my-app --update
+./install.sh --target ~/projects/my-app --update
 ```
 
 ## Validation
 
 Check if an installation is healthy:
 ```bash
-./install.sh --tool claude --target ~/projects/my-app --check
+./install.sh --target ~/projects/my-app --check
 ```
 
 ## Architecture
@@ -170,14 +149,13 @@ Check if an installation is healthy:
 agentic-framework/
 ├── install.sh              # Main entry point
 ├── installers/
-│   ├── claude-code.sh      # Claude-specific deployment
-│   └── gemini-cli.sh       # Gemini-specific compilation
+│   └── claude-code.sh      # Claude Code deployment
 ├── core/
 │   ├── doctrine.md         # Operational principles
 │   ├── phases/             # Workflow phases
 │   └── guardrails/         # Security, YAGNI, anti-hallucination
-├── agents/                 # Agent definitions (tool-agnostic)
-├── skills/                 # Skill definitions (tool-agnostic)
+├── agents/                 # Agent definitions
+├── skills/                 # Skill definitions
 ├── prompts/                # Reusable prompt templates
 ├── config/
 │   ├── project.template.md # Blank template
@@ -185,20 +163,20 @@ agentic-framework/
 └── docs/                   # Authoring guides
 ```
 
-The framework is tool-agnostic at the source level. Installers handle adaptation to each tool's expected format.
+Source files live in this repo; the installer deploys them into a project's `.claude/` directory and generates `CLAUDE.md`.
 
 ## Documentation
 
 - [Authoring Agents](docs/AUTHORING_AGENTS.md) — How to create new agents
 - [Authoring Skills](docs/AUTHORING_SKILLS.md) — How to create new skills
-- [Tool Differences](docs/TOOL_DIFFERENCES.md) — Capability matrix and workarounds
+- [Tool Notes](docs/TOOL_DIFFERENCES.md) — Claude Code capabilities and conventions
 
 ## Design Principles
 
-1. **Source-once, deploy-many** — Write agents/skills once, install anywhere
+1. **Source-once, deploy-many** — Write agents/skills once, install into any project
 2. **Modular by default** — Each agent and skill is independent
 3. **YAGNI** — Include only what's needed, nothing speculative
-4. **Tool-agnostic authoring** — No tool-specific syntax in source files
+4. **Source/deploy separation** — Author in the repo; the installer produces the `.claude/` layout
 5. **Idempotent installs** — Safe to run multiple times
 6. **Config never overwritten** — Project settings preserved on update
 

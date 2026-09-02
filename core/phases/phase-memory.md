@@ -15,7 +15,7 @@ CLAUDE.md
 ```
 
 Because these are imported into `CLAUDE.md`, Claude Code loads them into context
-automatically at session start. Gemini CLI reads the same files via `GEMINI.md`.
+automatically at session start.
 
 **Memory vs `_local_specification/`** — do not confuse them:
 
