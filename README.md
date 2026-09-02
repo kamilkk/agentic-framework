@@ -12,13 +12,15 @@ cd agentic-framework
 ./install.sh --target ~/projects/my-app
 ```
 
+**Recommended first step:** open Claude Code inside the target project and run `/project-profiler`. It inspects the codebase and asks you a few questions to fill in `.ai-framework/config/project.md` — the project profile every agent reads. The rest of the framework works with an empty profile, but agents are far more accurate once it's populated.
+
 ## What You Get
 
 ```
 my-app/
 ├── CLAUDE.md                    # Root instructions
 └── .claude/
-    ├── agents/                  # 10 specialist agents
+    ├── agents/                  # 11 specialist agents
     │   ├── analysis-expert.agent.md
     │   ├── plan-expert.agent.md
     │   ├── implement-expert.agent.md
@@ -40,9 +42,10 @@ my-app/
 
 ## What's Included
 
-### Agents (10 archetypes)
+### Agents (11 archetypes)
 | Agent | Purpose |
 |-------|---------|
+| `project-profiler-expert` | Inspects the codebase + interviews you to fill `.ai-framework/config/project.md` (`/project-profiler`) |
 | `analysis-expert` | Codebase exploration and understanding |
 | `plan-expert` | Implementation planning with step-by-step approach |
 | `implement-expert` | Code writing following established patterns |
@@ -158,8 +161,7 @@ agentic-framework/
 ├── skills/                 # Skill definitions
 ├── prompts/                # Reusable prompt templates
 ├── config/
-│   ├── project.template.md # Blank template
-│   └── project.example.md  # Filled example
+│   └── project.template.md # Blank project profile (deployed, then filled by /project-profiler)
 └── docs/                   # Authoring guides
 ```
 

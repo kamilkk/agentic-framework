@@ -51,9 +51,9 @@ Options:
   -h, --help          Show this help
 
 Available agents:
-  analysis-expert, plan-expert, implement-expert, debug-expert,
-  bug-rca-expert, review-expert, explain-expert, test-design-expert,
-  spec-expert, security-expert
+  project-profiler-expert, analysis-expert, plan-expert, implement-expert,
+  debug-expert, bug-rca-expert, review-expert, explain-expert,
+  test-design-expert, spec-expert, security-expert
 
 Available skills:
   anti-hallucination, green-coding, transparent-reasoning,

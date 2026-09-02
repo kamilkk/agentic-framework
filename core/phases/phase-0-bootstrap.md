@@ -26,6 +26,7 @@ If request implies specialized domain (and no agent activated yet):
 
 | Domain | Agent |
 |--------|-------|
+| Project onboarding / config | `project-profiler-expert` |
 | Architecture decisions | `solution-architect` |
 | Bug investigation | `debug-expert` / `bug-rca-expert` |
 | Code implementation | `implement-expert` |

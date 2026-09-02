@@ -171,3 +171,5 @@ _local_specification/
 - NEVER use `create_file` on source code files
 - If file exists: append version suffix `-v2`, `-v3`, etc.
 - Exclude verification sections from saved file (show in chat only)
+
+**Exception:** the `project-profiler-expert` agent writes the project configuration file `.ai-framework/config/project.md` (config, not source code, and edited in place — no version suffix). No other agent writes outside `_local_specification/`.
