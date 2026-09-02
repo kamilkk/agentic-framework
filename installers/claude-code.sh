@@ -298,7 +298,10 @@ HEADER
     # Section 5: Project Configuration Reference
     echo "## Project Configuration"
     echo ""
-    echo "See \`.ai-framework/config/project.md\` for project-specific settings."
+    echo "Project-specific settings (tech stack, conventions, repos, work-item system)."
+    echo "Imported below and auto-loaded each session; edit the file, not this section."
+    echo ""
+    echo "@.ai-framework/config/project.md"
     echo ""
     echo "---"
     echo ""
