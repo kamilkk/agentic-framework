@@ -39,6 +39,13 @@ Perform security assessments using structured threat modeling (STRIDE), OWASP To
 | white-box-tracing | When tracing auth/data flows |
 | workspace-search | When locating security-relevant code |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for prior security decisions, trust boundaries, and accepted risks so the assessment builds on them. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — security decisions, trust-boundary definitions, and mitigation patterns with lasting value — to the matching memory file (project knowledge, not source code). The SECURITY assessment itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Scope & Assets

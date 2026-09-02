@@ -39,6 +39,13 @@ Analyze code changes (PRs, diffs, or specific files) for correctness, security v
 | test-case-design | When assessing test coverage |
 | green-coding | When evaluating efficiency |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for the project's established conventions and patterns, and review changes against them (not against generic ideals). Verify against code before relying on it.
+- **Persist (after)**: append durable findings — a convention or pattern confirmed/agreed during review that future changes should follow — to the matching memory file (project knowledge, not source code). Findings for this review go in the report, not memory.
+
 ## Methodology
 
 ### Phase 1: Context Loading

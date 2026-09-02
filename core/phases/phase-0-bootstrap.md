@@ -46,5 +46,6 @@ Then: `🎯 Executing: [Agent Name] | Reading: [agent-file]`
 
 Before executing any agent protocol:
 1. Read project configuration for output file path rules
-2. Complete safety verification checklist
-3. Check tool/MCP availability (first task in session)
+2. **Recall project memory**: consult `.claude/memory/` (decisions, patterns, glossary — auto-loaded via `CLAUDE.md` imports) for prior context relevant to the request. See `phase-memory.md`.
+3. Complete safety verification checklist
+4. Check tool/MCP availability (first task in session)

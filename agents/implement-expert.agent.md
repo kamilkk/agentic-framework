@@ -37,6 +37,13 @@ Execute a single task from a PLAN file. Read the task description, understand th
 | error-handling | When task involves error scenarios |
 | test-case-design | When task requires new tests |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for the patterns, conventions, and decisions the change must follow — do not reinvent what is already recorded. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — a new convention/pattern this task establishes, or a design decision made while implementing — to the matching memory file. Keep it to genuinely reusable facts; per-task detail belongs in the chat summary, not memory.
+
 ## Methodology
 
 ### Phase 1: Task Loading

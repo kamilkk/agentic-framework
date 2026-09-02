@@ -39,6 +39,13 @@ Design comprehensive test cases using professional techniques: equivalence parti
 | white-box-tracing | When designing white-box tests |
 | workspace-search | When locating existing test patterns |
 
+## Memory
+
+Uses Claude Code's native memory (`.claude/memory/`, auto-loaded via `CLAUDE.md` imports). See `phase-memory.md`.
+
+- **Recall (before)**: consult memory for established terminology and testing conventions so test cases reuse consistent terms and structure. Verify against code before relying on it.
+- **Persist (after)**: append durable findings — testing conventions and term → entity mappings (glossary) worth reusing — to the matching memory file (project knowledge, not source code). The TC document itself still goes to `_local_specification/`.
+
 ## Methodology
 
 ### Phase 1: Test Basis Analysis

@@ -74,16 +74,24 @@ The Gemini installer compiles skills into compact bullet points. If you need the
 > "Apply the exhaustive-analysis approach: batch process all items, track progress, verify 100% coverage."
 
 ### Memory Persistence (Both)
-Neither tool has cross-session memory. Use project-local files:
+Neither tool keeps conversation memory across sessions, so the framework persists knowledge
+in **project-local files under `.claude/memory/`**, wired into each tool's *native* memory
+(no bespoke store):
 
 ```
-.ai-memory/
-├── decisions.md      # Architecture decisions made
-├── patterns.md       # Discovered codebase patterns
-└── session-notes.md  # Current task context
+.claude/memory/
+├── decisions.md      # Architecture decisions + rationale
+├── patterns.md       # Discovered codebase patterns & conventions
+└── glossary.md       # Domain term → codebase entity mappings
 ```
 
-Reference in your instructions: "Check .ai-memory/ for prior decisions before suggesting changes."
+The installer seeds these (without overwriting existing content) and imports them:
+- **Claude Code**: `CLAUDE.md` contains `@.claude/memory/*.md` imports — auto-loaded every session.
+- **Gemini CLI**: `GEMINI.md` imports the same files.
+
+Agents recall from memory before working and append durable facts after (see
+`phase-memory.md`). Per-task deliverables still go to `_local_specification/`, not memory.
+You can add memory yourself with Claude Code's `#` shortcut or `/memory`.
 
 ## Migration Between Tools
 
@@ -106,5 +114,5 @@ Manually copy to `.github/` structure or create a Copilot installer (contributio
 |------|-----------|--------|------------|
 | Gemini | No agent switching | Can't isolate agent context | Use clear role descriptions in prompt |
 | Gemini | Single file limit | Large frameworks get truncated | Keep under 800 lines, prioritize agents |
-| Claude | No cross-session memory | Loses context between sessions | Use .ai-memory/ files |
+| Claude | No cross-session memory | Loses context between sessions | Persist to `.claude/memory/` (imported by CLAUDE.md) |
 | Both | No IDE integration | Can't see diagnostics/errors directly | Use terminal commands for error output |

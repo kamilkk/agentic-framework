@@ -35,16 +35,22 @@ my-app/
     │   ├── code-review/SKILL.md
     │   ├── tdd (merged into test-case-design)
     │   └── ...
-    └── commands/                # Slash commands
-        ├── review.md
-        ├── plan.md
-        └── explain.md
+    ├── commands/                # Slash commands
+    │   ├── review.md
+    │   ├── plan.md
+    │   └── explain.md
+    └── memory/                  # Persistent memory (imported by CLAUDE.md)
+        ├── decisions.md         # Architecture decisions + rationale
+        ├── patterns.md          # Discovered patterns & conventions
+        └── glossary.md          # Domain term → entity mappings
 ```
 
 ### For Gemini CLI
 ```
 my-app/
 ├── GEMINI.md                   # Single compiled file (<800 lines)
+├── .claude/
+│   └── memory/                 # Persistent memory (imported by GEMINI.md)
 └── .ai-framework/
     └── config/project.md       # Project settings
 ```

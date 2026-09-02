@@ -207,6 +207,23 @@ Save analysis/plan/spec artifacts to `_local_specification/`:
 
 OUTPUT
 
+    # --- Project Memory (native memory via @ imports) ---
+    cat <<'MEMORY'
+
+## Project Memory
+
+Persistent cross-session memory (Gemini reads these via GEMINI.md imports; the same files
+work with Claude Code). **Consult before working**; **append durable facts after** —
+architecture decisions (with rationale), discovered patterns, and term mappings. Per-task
+detail goes to `_local_specification/`, not memory. Verify a remembered fact against code
+before relying on it.
+
+@.claude/memory/decisions.md
+@.claude/memory/patterns.md
+@.claude/memory/glossary.md
+
+MEMORY
+
     # --- Project Configuration ---
     echo ""
     echo "## Project Configuration"
@@ -221,10 +238,38 @@ OUTPUT
 }
 
 # --- Deploy ---
-# Create config dir
+# Create config + memory dirs
 if [[ "$DRY_RUN" != true ]]; then
     mkdir -p "$TARGET_DIR/.ai-framework/config"
+    mkdir -p "$TARGET_DIR/.claude/memory"
 fi
+
+# Seed project memory (never overwrite accumulated memory)
+seed_memory() {
+    local dst="$1" title="$2" purpose="$3"
+    if [[ -f "$dst" ]]; then
+        warn "Memory exists — preserved: $(basename "$dst")"
+        return
+    fi
+    if [[ "$DRY_RUN" == true ]]; then
+        echo "  [dry-run] $dst"
+        return
+    fi
+    mkdir -p "$(dirname "$dst")"
+    cat > "$dst" <<EOF
+# ${title}
+
+> ${purpose}
+> Native memory — imported by \`GEMINI.md\` (and \`CLAUDE.md\`), auto-loaded each session.
+> Append durable facts here as work uncovers them.
+
+<!-- Add entries below. Format: ### YYYY-MM-DD — Short title, then the fact + why. -->
+EOF
+    ok "Memory: $(basename "$dst")"
+}
+seed_memory "$TARGET_DIR/.claude/memory/decisions.md" "Architecture & Design Decisions" "Durable decisions and the rationale behind them."
+seed_memory "$TARGET_DIR/.claude/memory/patterns.md" "Codebase Patterns & Conventions" "Discovered patterns and conventions downstream work should follow."
+seed_memory "$TARGET_DIR/.claude/memory/glossary.md" "Domain Glossary" "Domain term to codebase entity mappings."
 
 # Deploy project config (never overwrite)
 local config_dst="$TARGET_DIR/.ai-framework/config/project.md"
@@ -267,5 +312,7 @@ echo ""
 echo "Structure created:"
 echo "  $TARGET_DIR/"
 echo "  ├── GEMINI.md          (single compiled file)"
+echo "  ├── .claude/"
+echo "  │   └── memory/        (persistent memory, imported by GEMINI.md)"
 echo "  └── .ai-framework/"
 echo "      └── config/project.md"
