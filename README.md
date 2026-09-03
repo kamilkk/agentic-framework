@@ -101,6 +101,20 @@ Adapted into the framework's hybrid skill format (standard Claude frontmatter + 
 - **Phase System** — Bootstrap → Checkpoint → Verification
 - **Security Guardrails** — OWASP-aware, production-assumed
 - **Anti-Hallucination** — Verify before claiming, cite sources
+- **Concise Output by Default** — user-facing chat is compressed ("caveman") style; deliverables stay full-fidelity (see below)
+
+### Output Style — Concise by Default ("Caveman")
+
+An always-active doctrine rule (`core/doctrine.md`) makes agents write **user-facing chat output** in a compressed, low-token style: no filler, hedging, pleasantries, or tool-call narration, while all technical substance — code, numbers, units, API names, exact error strings, negations — is kept verbatim. Required scaffolding (checkpoints, ADRs, confidence levels, security/irreversible-action warnings) stays intact; only its prose is tightened.
+
+**Scope — chat only.** The rule never touches files written to disk. Deliverables in `_local_specification/` (SPEC/ANALYSIS/PLAN/RCA/FIX/TC/EXPLANATION), memory (`.claude/memory/`), the project config, source code, comments, and commit messages are generated at full fidelity, exactly as before. Compression is off whenever output goes to a file or to another agent.
+
+**Verbose override.** For that turn's chat prose, agents return to normal complete-sentence style when your message matches any of:
+- `explain [something]`
+- `describe [something] in detail(s)`
+- `[something] is unclear` (also `clarify`, "I don't understand")
+
+The override affects only how the agent talks to you; the next turn returns to concise unless you keep triggering it or ask to stay verbose. Because deliverables are always full-fidelity, this override changes nothing about generated documents.
 
 ## Customization
 
