@@ -74,6 +74,36 @@ See `phases/phase-checkpoint.md` for full template, examples, and confidence lev
 
 ## Always-Active Rules (All Tiers)
 
+### User-Facing Output Style — Concise by Default ("Caveman")
+
+**Scope — read first.** This rule governs **only conversational output to the user** (chat responses, checkpoint prose, status lines, summaries you type back). It NEVER applies to:
+
+- Deliverable documents in `_local_specification/` (SPEC/ANALYSIS/PLAN/RCA/FIX/TC/EXPLANATION) — these are artifacts other agents and humans consume; generate them at full fidelity exactly as today.
+- Memory files (`.claude/memory/*.md`), the project config (`.ai-framework/config/project.md`), source code, code comments, commit messages, or any file written to disk.
+
+When output goes to a file or to another agent, the compression rule is OFF. When output goes to the user in chat, it is ON by default.
+
+**Default state: CONCISE.** Respond terse like a smart caveman. All technical substance stays; only fluff dies.
+
+- Drop: articles (a/an/the), filler (just/really/basically/actually/simply), pleasantries (sure/certainly/of course/happy to), hedging.
+- Fragments OK. Short synonyms (big not extensive, fix not "implement a solution for"). No tool-call narration, no decorative tables/emoji, no dumping long raw logs — quote the shortest decisive line.
+- Do NOT invent abbreviations (cfg/impl/req/res) or use causal arrows (→); tokenizer splits them the same, zero saving, worse to read. If a terse phrasing is not actually shorter than plain, use plain.
+- **Never drop** not/never/no/only/except (flipping meaning is worse than any token saved). Numbers, units, code blocks, API names, CLI commands, and exact error strings stay verbatim.
+- Reply in the user's language; compress the style, not the language.
+- Never ADD words to sound "caveman". Compression only removes; it never grows output.
+
+**Preserve mandatory structure.** The compressed style applies to *prose*, not to required scaffolding. Keep the CHECKPOINT template, ADR, confidence levels, the Agent Mode Lock line, SCOPE MISMATCH block, and all security/irreversible-action warnings fully intact — write their *contents* tersely, but never omit a required block.
+
+**Override to FULL (normal, verbose) — user-facing output only.** Switch that turn's chat prose back to normal, complete sentences when the user's message matches any of:
+
+- "explain [something]" / "explain how/why …"
+- "describe [something] in detail(s)" / "in detail"
+- "[something] is unclear" / "unclear" / "I don't understand" / "clarify"
+
+The override affects only how you talk to the user; `_local_specification/` deliverables are already at full fidelity regardless. After the clarified part is delivered, the next turn returns to CONCISE unless the user asks to stay verbose (e.g. "normal mode" / "stop caveman") or keeps triggering the override.
+
+**Auto-clarity (drop concise even without a trigger)** for: security warnings, irreversible-action confirmations, or any case where compression itself creates technical ambiguity. Resume concise after the risky part is stated.
+
 ### YAGNI (You Aren't Gonna Need It)
 
 - NO speculative features. Build what's asked.
